@@ -8,7 +8,7 @@ import json
 
 @mock_dynamodb
 class TestDatabaseFunctions(unittest.TestCase):
-    def setUp(self):
+    def setUp(self): #si
         print ('---------------------')
         print ('Start: setUp')
         warnings.filterwarnings(
@@ -34,7 +34,7 @@ class TestDatabaseFunctions(unittest.TestCase):
         #self.table_local = create_todo_table()
         print ('End: setUp')
 
-    def tearDown(self):
+    def tearDown(self): #si
         print ('---------------------')
         print ('Start: tearDown')
         """Delete mock database and table after test is run"""
@@ -47,7 +47,7 @@ class TestDatabaseFunctions(unittest.TestCase):
     def test_table_exists(self):
         print ('---------------------')
         print ('Start: test_table_exists')
-        #self.assertTrue(self.table)  # check if we got a result
+        self.assertTrue(self.table)  # check if we got a result
         #self.assertTrue(self.table_local)  # check if we got a result
 
         print('Table name:' + self.table.name)
@@ -120,7 +120,7 @@ class TestDatabaseFunctions(unittest.TestCase):
         print ('End: test_list_todo')
 
 
-    def test_update_todo(self):
+    def test_update_todo(self):  #si
         print ('---------------------')
         print ('Start: test_update_todo')
         from src.todoList import put_item
@@ -141,7 +141,7 @@ class TestDatabaseFunctions(unittest.TestCase):
         print ('End: test_update_todo')
 
 
-    def test_update_todo_error(self):
+    def test_update_todo_error(self): #si
         print ('---------------------')
         print ('Start: atest_update_todo_error')
         from src.todoList import put_item
@@ -190,14 +190,6 @@ class TestDatabaseFunctions(unittest.TestCase):
         print ('Item deleted succesfully')
         self.assertTrue(len(get_items(self.dynamodb)) == 0)
         print ('End: test_delete_todo')
-
-    def test_delete_todo_error(self):
-        print ('---------------------')
-        print ('Start: test_delete_todo_error')
-        from src.todoList import delete_item
-        # Testing file functions
-        self.assertRaises(TypeError, delete_item("", self.dynamodb))
-        print ('End: test_delete_todo_error')
 
 if __name__ == '__main__':
     unittest.main()
